@@ -25,7 +25,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @SpringBootApplication
 public class RabitOAuthApplication {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(RabitOAuthApplication.class);
 
 	public static void main(String[] args) {

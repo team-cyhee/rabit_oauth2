@@ -11,7 +11,7 @@ public class SampleController {
 	String abc() {
 		return "hi";
 	}
-	
+
 	@RequestMapping("/abcd")
 	@ResponseBody
 	String abcd() {
