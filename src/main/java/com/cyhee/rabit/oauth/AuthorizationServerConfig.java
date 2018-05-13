@@ -62,8 +62,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		PasswordEncoder en;
 		oauthServer
 		.passwordEncoder(bCryptPasswordEncoder)
-		.tokenKeyAccess("isAnonymous() || hasRole('ROLE_TRUSTED_CLIENT')") // permitAll()
-		.checkTokenAccess("hasRole('TRUSTED_CLIENT')") // isAuthenticated()
+		.tokenKeyAccess("permitAll()") // permitAll()
+		.checkTokenAccess("isAuthenticated()") // isAuthenticated()
 		;
 	}
 
