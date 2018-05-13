@@ -1,0 +1,12 @@
+server.port: 8081
+
+spring.datasource:
+  url: jdbc:mysql://localhost:6033/rabit_auth?useSSL=false
+  username: rabittest
+  password: rabittest
+  #initialization-mode: always
+
+logging.level:
+  org.springframework:
+    security: debug
+    boot: debug  
