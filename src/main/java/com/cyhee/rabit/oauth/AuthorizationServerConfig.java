@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -47,9 +48,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-
-
-
 	/**
 	 * Defines the security constraints on the token endpoints /oauth/token_key and /oauth/check_token
 	 * Client credentials are required to access the endpoints
@@ -59,9 +57,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	 */
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-		PasswordEncoder en;
+		PasswordEncoder encoder = new BCryptPasswordEncoder(12);
 		oauthServer
-		.passwordEncoder(bCryptPasswordEncoder)
+		.passwordEncoder(encoder)
 		.tokenKeyAccess("permitAll()") // permitAll()
 		.checkTokenAccess("isAuthenticated()") // isAuthenticated()
 		;
