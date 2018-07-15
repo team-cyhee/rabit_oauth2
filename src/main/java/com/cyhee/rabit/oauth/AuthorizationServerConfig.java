@@ -1,6 +1,11 @@
 package com.cyhee.rabit.oauth;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,12 +16,17 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+	@Autowired 
+	private AuthenticationManager authenticationManager;
+	
 	@Autowired
 	private JdbcClientDetailsService clientDetailsService;
 
@@ -25,14 +35,29 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Autowired
 	private JwtAccessTokenConverter tokenConverter;
+	
+	@Bean
+	public TokenEnhancer tokenEnhancer() {
+		return new UserTokenEnhancer();
+	}	
+	
+	@Bean
+	public TokenEnhancerChain tokenEnhancerChain() {
+		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+		List<TokenEnhancer> list = new ArrayList<>();
+		list.add(tokenEnhancer());
+		list.add(tokenConverter);
+		tokenEnhancerChain.setTokenEnhancers(list);
+		return tokenEnhancerChain;
+	}
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
 		PasswordEncoder encoder = new BCryptPasswordEncoder(12);
 		oauthServer
-		.passwordEncoder(encoder)
-		.tokenKeyAccess("permitAll()") // permitAll()
-		.checkTokenAccess("isAuthenticated()") // isAuthenticated()
+			.passwordEncoder(encoder)
+			.tokenKeyAccess("permitAll()") // permitAll()
+			.checkTokenAccess("isAuthenticated()") // isAuthenticated()
 		;
 	}
 
@@ -41,8 +66,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		super.configure(endpoints);
 		endpoints
-		.tokenStore(tokenStore)
-		.accessTokenConverter(tokenConverter)
+			.tokenStore(tokenStore)
+			.tokenEnhancer(tokenEnhancerChain())
+			//.accessTokenConverter(tokenConverter)
+			.authenticationManager(authenticationManager);
 		;
 	}	
 

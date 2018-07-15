@@ -1,9 +1,7 @@
 package com.cyhee.rabit.oauth;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,17 +15,16 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 public class TokenConfig {	
 	@Autowired
 	JwtAccessTokenConverter tokenConverter;
-	
-    private String privateKey;
 
-    private String publicKey;
-        
-    @Autowired
-    public TokenConfig(@Value("${config.oauth2.privateKey}") String privateKey, 
-    		@Value("${config.oauth2.publicKey}") String publicKey) {
-        this.privateKey = privateKey;
-        this.publicKey = publicKey;
-    }
+	private String privateKey;
+
+	private String publicKey;
+
+	@Autowired
+	public TokenConfig(@Value("${config.oauth2.privateKey}") String privateKey, @Value("${config.oauth2.publicKey}") String publicKey) {
+		this.privateKey = privateKey;
+		this.publicKey = publicKey;
+	}
 
 	@Bean
 	public JwtAccessTokenConverter tokenConverter() {

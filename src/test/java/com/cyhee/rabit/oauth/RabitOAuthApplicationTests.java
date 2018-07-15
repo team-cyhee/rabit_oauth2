@@ -11,6 +11,7 @@ public class RabitOAuthApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		
 	}
 
 }

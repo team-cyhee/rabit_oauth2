@@ -1,7 +1,7 @@
 server.port: 8081
 
 spring.datasource:
-  url: jdbc:mysql://localhost:6033/rabit_auth?useSSL=false
+  url: jdbc:mysql://localhost:6033/rabit?useSSL=false
   username: rabit
   password: rabit
   #initialization-mode: always
@@ -11,7 +11,6 @@ logging.level:
     security: debug
     boot: debug
 
-chytest:     hihihihihi
 
 config.oauth2.privateKey: |
       -----BEGIN RSA PRIVATE KEY-----
