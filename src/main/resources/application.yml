@@ -1,4 +1,13 @@
-server.port: 8081
+server:
+  port: 8081
+#  ssl:
+#    enabled: true
+#    key-store: C:\Users\Apple\eclipse-workspace\Rabit-OAuth\src\main\resources\static\chy_test.jks # 1번에서 생성한 Key store 경로와 파일명을 적어줍니다. 
+#    key-store-password: chy_test  # 1번에서 생성한 Key store의 비밀번호를 적어줍니다.
+#    key-password: chy_test # 1번에서 생성한 키스토어의 마지막의 키 비밀번호
+#    key-alias: chy_test # 키 스토어 별칭
+#    trust-store: C:\Users\Apple\eclipse-workspace\Rabit-OAuth\src\main\resources\static\chy_test.ts # 2번에서 생성한 Trust-Store 경로
+#    trust-store-password: chy_test # Trust-Store 비밀번호
 
 spring.datasource:
   url: jdbc:mysql://localhost:6033/rabit?useSSL=false

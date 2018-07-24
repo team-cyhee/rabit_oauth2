@@ -31,6 +31,8 @@ dependencies {
 	compile('org.springframework.security.oauth:spring-security-oauth2:2.2.0.RELEASE')
 	compile('org.springframework.security:spring-security-jwt:1.0.8.RELEASE')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	// gson
+	compile('com.google.code.gson:gson:2.8.5')
 	// lombok
 	compile('org.projectlombok:lombok:1.18.0')
 	runtime('mysql:mysql-connector-java')

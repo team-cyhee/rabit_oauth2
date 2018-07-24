@@ -1,4 +1,4 @@
-package com.cyhee.rabit.oauth;
+package com.cyhee.rabit.oauth.config.token;
 
 import javax.sql.DataSource;
 

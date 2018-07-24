@@ -6,3 +6,6 @@ simple oauth2
 
 #### To get new token with credential client grant type
 `curl $client_id:$client_secret@localhost:8081/oauth/token -d "grant_type=client_credentials"`
+
+#### To get new token with naver token
+`curl --header "Authorization: Bearer $naver_token" localhost:8081/oauth/token/naver`

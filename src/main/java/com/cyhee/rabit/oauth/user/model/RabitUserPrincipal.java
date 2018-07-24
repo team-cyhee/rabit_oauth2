@@ -1,4 +1,4 @@
-package com.cyhee.rabit.oauth.user;
+package com.cyhee.rabit.oauth.user.model;
 
 import java.util.Collection;
 

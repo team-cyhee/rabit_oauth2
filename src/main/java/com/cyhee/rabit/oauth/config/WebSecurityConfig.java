@@ -1,4 +1,4 @@
-package com.cyhee.rabit.oauth;
+package com.cyhee.rabit.oauth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +24,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf()
 				.disable()
 			.authorizeRequests()
-				.antMatchers("/oauth/authorization").permitAll()
-				.anyRequest().authenticated()
+				.anyRequest().permitAll()
+				/*.antMatchers("/oauth/authorization").permitAll()
+				.anyRequest().authenticated()*/
 			.and()
 				.httpBasic()
 			.and()

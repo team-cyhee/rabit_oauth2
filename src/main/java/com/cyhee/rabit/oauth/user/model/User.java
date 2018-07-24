@@ -1,4 +1,4 @@
-package com.cyhee.rabit.oauth.user;
+package com.cyhee.rabit.oauth.user.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,4 +18,6 @@ public class User {
     private String username;
  
     private String password;
+    
+    private String email;
 }
