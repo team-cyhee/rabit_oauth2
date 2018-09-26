@@ -24,7 +24,7 @@ public class SNSExceptionHandler {
 		return new ResponseEntity<>(e, HttpStatus.PRECONDITION_REQUIRED);
 	}
 	
-	@ExceptionHandler(value = InvalidTokenException.class)
+	@ExceptionHandler(value=InvalidTokenException.class)
 	public ResponseEntity<Exception> invalidTokenHandler(InvalidTokenException e) {
 		return new ResponseEntity<>(e, HttpStatus.UNAUTHORIZED);
 	}
