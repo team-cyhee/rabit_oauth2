@@ -9,17 +9,27 @@ server:
 #    trust-store: C:\Users\Apple\eclipse-workspace\Rabit-OAuth\src\main\resources\static\chy_test.ts # 2번에서 생성한 Trust-Store 경로
 #    trust-store-password: chy_test # Trust-Store 비밀번호
 
-spring.datasource:
-  url: jdbc:postgresql://${DB_HOST}/rabit
-  username: ${DB_USER}
-  password: ${DB_PASSWORD}
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create     
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL82Dialect
+        show-sql: true
+        format-sql: true
+        type.descriptor.sql.BasicBinder: TRACE  
+        jdbc.lob.non_contextual_creation: true
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}/rabit
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
   #initialization-mode: always
 
 logging.level:
   org.springframework:
     security: debug
     boot: debug
-
 
 config.oauth2.privateKey: |
       -----BEGIN RSA PRIVATE KEY-----

@@ -6,7 +6,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class RabitUserPrincipal implements UserDetails {
+	// TODO add roles and override other functions
+	
 	private static final long serialVersionUID = -4358215705550304752L;
+	
 	private User user;
  
     public RabitUserPrincipal(User user) {
