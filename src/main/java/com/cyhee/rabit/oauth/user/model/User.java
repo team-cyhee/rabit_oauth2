@@ -11,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import com.cyhee.rabit.oauth.base.model.TimestampEntity;
+import com.cyhee.rabit.oauth.user.validation.NotSnsGroup;
 import com.cyhee.rabit.oauth.user.validation.Password;
 import com.cyhee.rabit.oauth.user.validation.SetPasswordGroup;
 
@@ -23,8 +24,8 @@ import lombok.Setter;
 public class User extends TimestampEntity {
 	
     @Column(nullable=false, unique=true, length=50, updatable=false)
-	@Email
-	@NotNull
+	@Email(groups=NotSnsGroup.class)
+	@NotNull(groups=NotSnsGroup.class)
 	private String email;
 	
 	@Column(nullable=false, length=255)
