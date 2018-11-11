@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cyhee.rabit.oauth.sns.facebook.model.FacebookRequest;
@@ -26,19 +27,24 @@ import com.cyhee.rabit.oauth.user.validation.SetPasswordGroup;
 import javassist.NotFoundException;
 
 @RestController
-@RequestMapping("/oauth/token/")
+@RequestMapping("/oauth/token")
 public class SNSAuthController {
 	@Autowired
 	SnsTokenService snsTokenService;
 	
-	@GetMapping("{social}")
+	@GetMapping("/rabit")
+	ResponseEntity<String> authorizationCode(@RequestParam String code) {
+		return ResponseEntity.ok(code);
+	}
+	
+	@GetMapping("/{social}")
 	ResponseEntity<OAuth2AccessToken> signIn(HttpServletRequest request, @PathVariable String social) throws NotFoundException {
 		SnsRequest snsRequest = getSnsRequest(social, request);
 		if(snsRequest == null) throw new NotFoundException("Not supported sns");
-		return new ResponseEntity<>(snsTokenService.signIn(snsRequest), HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(snsTokenService.signIn(snsRequest), HttpStatus.OK);
 	}
 	
-	@PostMapping("{social}")
+	@PostMapping("/{social}")
 	public ResponseEntity<Void> signUp(HttpServletRequest request, @PathVariable String social,
 			@RequestBody @Validated({SetPasswordGroup.class}) User user, BindingResult bindingResult) throws NotFoundException {
 		
