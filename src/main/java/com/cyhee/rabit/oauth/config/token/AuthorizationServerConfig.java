@@ -58,7 +58,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		oauthServer
 			.passwordEncoder(encoder)
 			.tokenKeyAccess("permitAll()") // permitAll()
-			.checkTokenAccess("isAuthenticated()") // isAuthenticated()
+			.checkTokenAccess("permitAll()") // isAuthenticated()
 		;
 	}
 	

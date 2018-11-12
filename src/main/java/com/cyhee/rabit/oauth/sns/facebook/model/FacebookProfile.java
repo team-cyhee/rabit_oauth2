@@ -1,4 +1,4 @@
-package com.cyhee.rabit.oauth.sns.naver.model;
+package com.cyhee.rabit.oauth.sns.facebook.model;
 
 import com.cyhee.rabit.oauth.sns.model.SnsProfile;
 
@@ -7,8 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class NaverProfile extends SnsProfile {
-	private String nickname;
-	private String profileImage;
+public class FacebookProfile extends SnsProfile {	
+	private Long id;
 	private String name;
 }
