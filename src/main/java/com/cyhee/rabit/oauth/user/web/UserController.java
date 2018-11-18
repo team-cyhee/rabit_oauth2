@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cyhee.rabit.exception.cmm.ValidationFailException;
+import com.cyhee.rabit.oauth.email.service.EmailService;
 import com.cyhee.rabit.oauth.user.model.User;
 import com.cyhee.rabit.oauth.user.service.UserService;
 import com.cyhee.rabit.oauth.user.validation.NotSnsGroup;
@@ -21,14 +23,19 @@ import com.cyhee.rabit.oauth.user.validation.NotSnsGroup;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@PostMapping
 	public ResponseEntity<Void> addUser(@RequestBody @Validated({NotSnsGroup.class}) User user, BindingResult bindingResult) {
 		// TODO Handle Exception
 		if (bindingResult.hasErrors())
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			throw new ValidationFailException(bindingResult.getAllErrors());
 	
 		userService.addUser(user);
+		if(user.getEmail() != null)
+			emailService.registerEmail(user, user.getEmail());
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
