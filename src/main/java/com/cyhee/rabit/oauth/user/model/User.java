@@ -23,9 +23,8 @@ import lombok.Setter;
 @Getter @Setter
 public class User extends TimestampEntity {
 	
-    @Column(nullable=false, unique=true, length=50, updatable=false)
+    @Column(nullable=true, unique=true, length=50, updatable=false)
 	@Email(groups=NotSnsGroup.class)
-	@NotNull(groups=NotSnsGroup.class)
 	private String email;
 	
 	@Column(nullable=false, length=255)
@@ -46,5 +45,5 @@ public class User extends TimestampEntity {
 	private Date birth;
 	
 	@Column(nullable=false)
-	private UserStatus status = UserStatus.PENDING;
+	private UserStatus status = UserStatus.ACTIVE;
 }

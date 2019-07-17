@@ -12,6 +12,8 @@ import javax.validation.ValidatorFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cyhee.rabit.oauth.user.validation.Password;
@@ -63,5 +65,5 @@ public class UserValidationTest {
 		user.setPassword("itwillpass2@");
 		violations = validator.validate(user);
 		assertThat(violations.isEmpty()).isTrue();
-	}
+	}	
 }
